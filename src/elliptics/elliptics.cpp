@@ -113,10 +113,10 @@ std::string elliptics_node_t::get(const std::string &key)
 	uint64_t offset = 0;
 	uint64_t size = 0;
 
-	return m_session->read_data(key, offset, size)->file().to_string();
+	return m_session->read_data(key, offset, size).get_one().file().to_string();
 }
 
-static inline std::vector<std::string> convert(const ioremap::elliptics::bulk_read_result &ret)
+static inline std::vector<std::string> convert(const ioremap::elliptics::sync_read_result &ret)
 {
 	std::vector<std::string> result;
 	for (size_t i = 0; i < ret.size(); ++i) {
